@@ -47,3 +47,15 @@ def drop_table(connection_string:str, table_name:str):
     response = requests.post(connection_string, json=j)
     print(f"Status Code: {response.status_code}")
     assert response.status_code == 200
+
+
+def insert_values(connection_string:str, table_name:str, values:List):
+    j = {
+        "INSERT": {
+            "INTO": table_name,
+            "VALUES": values
+        }
+    }
+    response = requests.post(connection_string, json=j)
+    print(f"Status Code: {response.status_code}")
+    assert response.status_code == 200
