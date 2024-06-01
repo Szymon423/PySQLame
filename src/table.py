@@ -32,10 +32,10 @@ def create_table(connection_string:str, table: Table):
         }
     }
     response = requests.post(connection_string, json=j)
-    print(f"Status Code: {response.status_code}")
     assert response.status_code == 200
     data = response.json()
-    print(f"resoult: {data["code"]}")
+    code = "OK" if data["code"] == 0 else "BAD"
+    print(f"resoult: {code}")
     print(f"message: {data["message"]}")
 
 
@@ -48,10 +48,10 @@ def drop_table(connection_string:str, table_name:str):
         }
     }
     response = requests.post(connection_string, json=j)
-    print(f"Status Code: {response.status_code}")
     assert response.status_code == 200
     data = response.json()
-    print(f"resoult: {data["code"]}")
+    code = "OK" if data["code"] == 0 else "BAD"
+    print(f"resoult: {code}")
     print(f"message: {data["message"]}")
 
 
@@ -63,8 +63,8 @@ def insert_values(connection_string:str, table_name:str, values:List):
         }
     }
     response = requests.post(connection_string, json=j)
-    print(f"Status Code: {response.status_code}")
     assert response.status_code == 200
     data = response.json()
-    print(f"resoult: {data["code"]}")
+    code = "OK" if data["code"] == 0 else "BAD"
+    print(f"resoult: {code}")
     print(f"message: {data["message"]}")
