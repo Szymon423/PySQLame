@@ -1,9 +1,9 @@
 from definitions import *
 import requests
 import json
+from connect import Connection
 
-
-def create_table(connection_string:str, table: Table):
+def create_table(connection_string:Connection, table: Table):
     print(f"Creating table: '{table.name}' with columns:")
     columns = []
     for col in table.columns:
@@ -31,7 +31,11 @@ def create_table(connection_string:str, table: Table):
             }
         }
     }
-    response = requests.post(connection_string, json=j)
+
+    headers = {
+        'Authentication': connection_string.token
+    }
+    response = requests.post(connection_string.url + "/request", json=j, headers=headers)
     assert response.status_code == 200
     data = response.json()
     code = "OK" if data["code"] == 0 else "BAD"
@@ -39,7 +43,7 @@ def create_table(connection_string:str, table: Table):
     print(f"message: {data["message"]}")
 
 
-def drop_table(connection_string:str, table_name:str):
+def drop_table(connection_string:Connection, table_name:str):
     j = {
         "DROP": {
             "TABLE" : {
@@ -47,7 +51,10 @@ def drop_table(connection_string:str, table_name:str):
             }
         }
     }
-    response = requests.post(connection_string, json=j)
+    headers = {
+        'Authentication': connection_string.token
+    }
+    response = requests.post(connection_string.url + "/request", json=j, headers=headers)
     assert response.status_code == 200
     data = response.json()
     code = "OK" if data["code"] == 0 else "BAD"
@@ -55,14 +62,17 @@ def drop_table(connection_string:str, table_name:str):
     print(f"message: {data["message"]}")
 
 
-def insert_values(connection_string:str, table_name:str, values:List):
+def insert_values(connection_string:Connection, table_name:str, values:List):
     j = {
         "INSERT": {
             "INTO": table_name,
             "VALUES": values
         }
     }
-    response = requests.post(connection_string, json=j)
+    headers = {
+        'Authentication': connection_string.token
+    }
+    response = requests.post(connection_string.url + "/request", json=j, headers=headers)
     assert response.status_code == 200
     data = response.json()
     code = "OK" if data["code"] == 0 else "BAD"
