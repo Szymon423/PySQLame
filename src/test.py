@@ -5,7 +5,7 @@ url = "http://127.0.0.1:9443"
 connection_string = Connection(url)
 
 try:
-    connection_string.log("admin", "admin")
+    connection_string.log("dev", "dev")
 except:
     print("Unable to login")
     exit()

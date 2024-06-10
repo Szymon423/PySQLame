@@ -32,7 +32,7 @@ def create_table(connection_string:Connection, table: Table):
     }
 
     headers = {
-        'Authentication': connection_string.token
+        'Authorization': connection_string.token
     }
     response = requests.post(connection_string.url + "/request", json=j, headers=headers)
     assert response.status_code == 200
@@ -51,7 +51,7 @@ def drop_table(connection_string:Connection, table_name:str):
         }
     }
     headers = {
-        'Authentication': connection_string.token
+        'Authorization': connection_string.token
     }
     response = requests.post(connection_string.url + "/request", json=j, headers=headers)
     assert response.status_code == 200
@@ -69,7 +69,7 @@ def insert_values(connection_string:Connection, table_name:str, values:List):
         }
     }
     headers = {
-        'Authentication': connection_string.token
+        'Authorization': connection_string.token
     }
     response = requests.post(connection_string.url + "/request", json=j, headers=headers)
     assert response.status_code == 200

@@ -44,7 +44,6 @@ class Connection:
     def log(self, login:str, password:str):
         self.password = password
         self.login = login
-        print(f"Trying to authorise user: '{ self.login }'")
         headers = {
             'login': self.login,
             'password': self.password
