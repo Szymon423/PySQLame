@@ -1,7 +1,6 @@
 from definitions import *
 import requests
 import json
-from connect import Connection
 
 def create_table(connection_string:Connection, table: Table):
     print(f"Creating table: '{table.name}' with columns:")

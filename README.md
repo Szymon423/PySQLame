@@ -8,7 +8,6 @@ This project is `Python` library which allows to communicate with `SQLame` datab
 ```python
 from definitions import *
 from table import create_table, insert_values, drop_table
-from connect import Connection
 
 url = "http://127.0.0.1:9443"
 connection_string = Connection(url)
